@@ -16,7 +16,7 @@
 - [x] 재작성 가이드, MVP와 아키텍처 초안
 - [x] .gitignore / .gitattributes / .editorconfig
 - [x] 기능·오류 이슈 템플릿과 PR 템플릿
-- [ ] 로컬 main 초기 커밋 및 origin 연결 확인
+- [x] 로컬 main 초기 커밋 및 origin 연결 확인
 - [ ] GitHub Private 저장소 생성·최초 push 확인
 
 완료 기준: GitHub에서 Private 표시, main 브랜치와 문서를 확인하고 로컬 커밋과 원격 커밋이 일치합니다.

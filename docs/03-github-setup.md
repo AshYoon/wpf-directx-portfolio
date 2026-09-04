@@ -10,7 +10,7 @@
 | 브랜치 | 로컬 main, 원격은 최초 push 후 확인 |
 | origin | `https://github.com/AshYoon/wpf-directx-portfolio.git` 연결 완료 |
 | Git 설정 | 저장소 로컬 줄바꿈·pull·push·인증 도우미 설정 완료 |
-| 최초 업로드 | Git Credential Manager 인증 진행 중 |
+| 최초 업로드 | 로컬 초기 커밋 완료. Git Credential Manager 인증 후 push 대기 |
 | CI | 앱·테스트가 생기는 M1에 구성 예정 |
 | 브랜치 보호 | 미설정. 계정 요금제와 실제 CI 생성 후 검토 |
 | 브랜치 자동 삭제 | 적용 안 함. 명시적 승인 부족을 사유로 자동 승인 검토에서 거부됨 |
