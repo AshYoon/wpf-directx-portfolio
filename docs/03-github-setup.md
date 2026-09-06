@@ -5,19 +5,21 @@
 | 항목 | 값·상태 |
 | --- | --- |
 | 저장소 | [AshYoon/wpf-directx-portfolio](https://github.com/AshYoon/wpf-directx-portfolio) |
-| 공개 범위 | Private으로 생성 |
+| 공개 범위 | Public — 2026-09-07 GitHub 조회로 확인 |
 | 로컬 경로 | `D:\WPF` |
-| 브랜치 | 로컬 main, 원격은 최초 push 후 확인 |
+| 브랜치 | 로컬 main과 origin/main 연결, push 후 커밋 일치 확인 |
 | origin | `https://github.com/AshYoon/wpf-directx-portfolio.git` 연결 완료 |
 | Git 설정 | 저장소 로컬 줄바꿈·pull·push·인증 도우미 설정 완료 |
-| 최초 업로드 | 로컬 초기 커밋 완료. Git Credential Manager 인증 후 push 대기 |
-| CI | 앱·테스트가 생기는 M1에 구성 예정 |
+| 최초 업로드 | 2026-09-07 완료. Spatial Lab 구현 커밋 66741da 업로드 및 원격 반영 확인 |
+| CI | 미설정. 로컬 빌드·자동 검증은 scripts/build.ps1 -Test로 실행 |
 | 브랜치 보호 | 미설정. 계정 요금제와 실제 CI 생성 후 검토 |
 | 브랜치 자동 삭제 | 적용 안 함. 명시적 승인 부족을 사유로 자동 승인 검토에서 거부됨 |
 | Issues / Squash merge | GitHub 기본값으로 활성화되어 있음을 확인 |
 | 라이선스 | 미선택. 공개·배포 범위를 정한 뒤 선택 |
 
-아래 권장 설정과 실제 적용 상태를 구분합니다. Private 저장소 생성 시 README·.gitignore·라이선스 자동 생성을 끄고, 로컬의 초기 커밋을 올리는 방식으로 구성했습니다. [GitHub 공식 생성 안내](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+2026-09-07 WPF 앱, DirectX11 엔진, ObjectCommandQueue·SVRThreadPool, 테스트와 문서를 업로드했습니다. Release 앱 실행 검증과 네이티브 테스트 4개를 다시 통과했습니다. 실행 파일은 소스 저장소에 포함하지 않으며 [README의 빌드·실행 방법](../README.md#실행)을 따릅니다.
+
+아래 초기 설정 기록·권장값과 현재 상태를 구분합니다. 최초 생성 당시에는 Private이었으나, 이번 업로드 직전 조회에서는 Public이었습니다. 업로드 작업에서는 공개 설정을 변경하지 않았습니다. 저장소 생성 시 README·.gitignore·라이선스 자동 생성을 끄고, 로컬의 초기 커밋을 올리는 방식으로 구성했습니다. [GitHub 공식 생성 안내](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
 
 ## 적용한 로컬 Git 설정
 
