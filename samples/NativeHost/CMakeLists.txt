@@ -1,0 +1,6 @@
+add_executable(NativeHost WIN32 main.cpp)
+target_compile_features(NativeHost PRIVATE cxx_std_17)
+target_compile_definitions(NativeHost PRIVATE UNICODE _UNICODE NOMINMAX WIN32_LEAN_AND_MEAN)
+target_compile_options(NativeHost PRIVATE /W4 /permissive- /utf-8)
+target_link_libraries(NativeHost PRIVATE SceneRenderer user32)
+set_target_properties(NativeHost PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")

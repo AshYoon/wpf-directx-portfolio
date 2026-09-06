@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>Exe</OutputType><TargetFramework>net9.0</TargetFramework>
+  <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+ </PropertyGroup>
+ <ItemGroup>
+  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
+  <Compile Include="../../app/SpatialLab/ViewModels/**/*.cs" Link="ViewModels/%(RecursiveDir)%(Filename)%(Extension)"/>
+  <Compile Include="../../app/SpatialLab/Models/**/*.cs" Link="Models/%(RecursiveDir)%(Filename)%(Extension)"/>
+  <Compile Include="../../app/SpatialLab/GlobalEnums/**/*.cs" Link="GlobalEnums/%(RecursiveDir)%(Filename)%(Extension)"/>
+  <Compile Include="../../app/SpatialLab/Interfaces/ISceneService.cs" Link="Interfaces/ISceneService.cs"/>
+ </ItemGroup>
+</Project>

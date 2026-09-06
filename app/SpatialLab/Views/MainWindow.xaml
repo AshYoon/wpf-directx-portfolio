@@ -1,0 +1,98 @@
+<Window x:Class="SpatialLab.Views.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:controls="clr-namespace:SpatialLab.UserControls"
+ Title="Spatial Lab | WPF × DirectX11" Width="1320" Height="880"
+ MinWidth="1000" MinHeight="740" WindowStartupLocation="CenterScreen"
+ Background="#0B1220" Foreground="#E6EDF5" FontFamily="Malgun Gothic" FontSize="13"
+ UseLayoutRounding="True">
+
+ <!-- 왼쪽은 네이티브 뷰포트, 오른쪽은 ViewModel에 바인딩한 설정·통계 패널이다. -->
+ <Grid x:Name="Root" Margin="24,18" Background="#0B1220">
+  <Grid.RowDefinitions>
+   <RowDefinition Height="76"/><RowDefinition Height="*"/><RowDefinition Height="30"/>
+  </Grid.RowDefinitions>
+  <Grid>
+   <StackPanel>
+    <TextBlock Text="SPATIAL LAB" FontSize="12" FontWeight="Bold" Foreground="#69DFC1"/>
+    <TextBlock Text="공간 탐색 비교" FontSize="28" FontWeight="SemiBold" Margin="0,4,0,0"/>
+   </StackPanel>
+   <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+    <TextBlock Text="C++ / DIRECTX 11 / WPF" Foreground="#91A3B9" HorizontalAlignment="Right"/>
+    <TextBlock Text="같은 객체와 검색 범위에서 결과를 확인합니다." Style="{StaticResource Muted}" Margin="0,6,0,0"/>
+   </StackPanel>
+  </Grid>
+  <Grid Grid.Row="1">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="18"/><ColumnDefinition Width="326"/></Grid.ColumnDefinitions>
+   <Border Background="#101C2C" BorderBrush="#223247" BorderThickness="1" CornerRadius="8" Padding="14">
+    <Grid>
+     <Grid.RowDefinitions><RowDefinition Height="38"/><RowDefinition Height="*"/><RowDefinition Height="60"/></Grid.RowDefinitions>
+     <DockPanel>
+      <TextBlock Text="LIVE VIEW" FontWeight="Bold" Foreground="#91A3B9"/>
+      <TextBlock x:Name="ModeLabel" Text="{Binding ModeLabel}" HorizontalAlignment="Right" Foreground="#69DFC1"/>
+     </DockPanel>
+     <Border Grid.Row="1" BorderBrush="#25374C" BorderThickness="1" Background="#070C13">
+      <controls:DirectXHost x:Name="Viewport"/>
+     </Border>
+     <StackPanel Grid.Row="2" VerticalAlignment="Center">
+      <TextBlock Text="클릭·드래그로 검색 중심 이동 · 두 검색 모두 실행 · 표시 시간은 CPU 검색만 측정" Style="{StaticResource Muted}" FontSize="12"/>
+      <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+       <TextBlock Text="● 검색 결과" Foreground="#69DFC1" Margin="0,0,18,0"/>
+       <TextBlock Text="● 검사 후보" Foreground="#F0A852" Margin="0,0,18,0"/>
+       <TextBlock Text="● 나머지 객체" Foreground="#66829D"/>
+      </StackPanel>
+     </StackPanel>
+    </Grid>
+   </Border>
+   <Border Grid.Column="2" Background="#121E30" CornerRadius="8" BorderBrush="#223247" BorderThickness="1" Padding="20">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+     <StackPanel>
+      <TextBlock Text="실험 설정" FontSize="17" FontWeight="SemiBold" Margin="0,0,0,10"/>
+      <TextBlock Text="객체 수" Style="{StaticResource Muted}" Margin="0,0,0,6"/>
+      <ComboBox x:Name="CountChoice" ItemsSource="{Binding ObjectCounts}" ItemStringFormat="{}{0:N0}개"
+                SelectedItem="{Binding SelectedObjectCount, Mode=TwoWay}" IsEnabled="{Binding CanInteract}"/>
+      <TextBlock Text="객체 분포" Style="{StaticResource Muted}" Margin="0,10,0,6"/>
+      <ComboBox x:Name="DistributionChoice" ItemsSource="{Binding Distributions}" DisplayMemberPath="Label" SelectedValuePath="Value"
+                SelectedValue="{Binding SelectedDistribution, Mode=TwoWay}" IsEnabled="{Binding CanInteract}"/>
+      <TextBlock Text="후보를 표시할 탐색 방식" Style="{StaticResource Muted}" Margin="0,10,0,6"/>
+      <ComboBox x:Name="ModeChoice" ItemsSource="{Binding SearchMethods}" DisplayMemberPath="Label" SelectedValuePath="Value"
+                SelectedValue="{Binding SelectedSearchMethod, Mode=TwoWay}" IsEnabled="{Binding CanInteract}"/>
+      <DockPanel Margin="0,10,0,6">
+       <TextBlock Text="검색 반경" Style="{StaticResource Muted}"/>
+       <TextBlock x:Name="RadiusLabel" Text="{Binding RadiusLabel}" HorizontalAlignment="Right" Foreground="#69DFC1"/>
+      </DockPanel>
+      <Slider x:Name="RadiusSlider" Minimum="1" Maximum="50" Value="{Binding Radius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TickFrequency="1"
+              IsEnabled="{Binding CanInteract}" AutomationProperties.Name="검색 반경"/>
+      <CheckBox x:Name="GridCheck" Content="그리드 표시 · 셀 크기 5" IsChecked="{Binding ShowGrid, Mode=TwoWay}" Margin="0,8,0,10"
+                IsEnabled="{Binding CanInteract}"/>
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition/></Grid.ColumnDefinitions>
+       <Button x:Name="PauseButton" Content="{Binding PauseLabel}" Background="#69DFC1" Foreground="#0B1220" Command="{Binding PauseCommand}"/>
+       <Button x:Name="ResetButton" Grid.Column="2" Content="같은 배치로 초기화" FontSize="11" Command="{Binding ResetCommand}"/>
+      </Grid>
+      <Border Height="1" Background="#28394E" Margin="0,12,0,10"/>
+      <TextBlock Text="검색 결과" FontSize="17" FontWeight="SemiBold"/>
+      <TextBlock x:Name="HitLabel" Text="{Binding HitText}" FontSize="32" FontWeight="SemiBold" Foreground="#69DFC1" Margin="0,6,0,0"/>
+      <TextBlock x:Name="MatchLabel" Text="{Binding MatchText}" Style="{StaticResource MatchStatus}" Margin="0,2,0,8"/>
+      <TextBlock Text="검사 후보 · 전체 → 그리드" Style="{StaticResource Muted}" FontSize="12"/>
+      <TextBlock x:Name="CandidateLabel" Text="{Binding CandidateText}" FontSize="20" Margin="0,4,0,10"/>
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <Grid.RowDefinitions><RowDefinition Height="22"/><RowDefinition Height="22"/><RowDefinition Height="22"/><RowDefinition Height="24"/></Grid.RowDefinitions>
+       <TextBlock Text="전체 순회" Style="{StaticResource Muted}"/><TextBlock x:Name="LinearTime" Grid.Column="1" Text="{Binding LinearTimeText}"/>
+       <TextBlock Grid.Row="1" Text="그리드 검색" Style="{StaticResource Muted}"/><TextBlock x:Name="GridTime" Grid.Row="1" Grid.Column="1" Text="{Binding GridTimeText}" Foreground="#69DFC1"/>
+       <TextBlock Grid.Row="2" Text="그리드 갱신" Style="{StaticResource Muted}"/><TextBlock x:Name="BuildTime" Grid.Row="2" Grid.Column="1" Text="{Binding BuildTimeText}"/>
+       <TextBlock Grid.Row="3" Text="검색 + 갱신" FontWeight="SemiBold"/><TextBlock x:Name="TotalTime" Grid.Row="3" Grid.Column="1" Text="{Binding TotalTimeText}" FontWeight="SemiBold"/>
+      </Grid>
+      <TextBlock Text="이동 중 갱신 포함. 검색이 적으면 그리드가 더 느릴 수 있습니다."
+                 Style="{StaticResource Muted}" FontSize="11" Margin="0,8,0,0" LineHeight="16"/>
+     </StackPanel>
+    </ScrollViewer>
+   </Border>
+  </Grid>
+  <DockPanel Grid.Row="2" VerticalAlignment="Bottom">
+   <TextBlock x:Name="StatusLabel" Text="{Binding StatusText}" Style="{StaticResource EngineStatus}" FontSize="11"/>
+   <TextBlock Text="100 × 100 WORLD  /  SEED 42" HorizontalAlignment="Right" Foreground="#657D98" FontSize="11"/>
+  </DockPanel>
+ </Grid>
+</Window>

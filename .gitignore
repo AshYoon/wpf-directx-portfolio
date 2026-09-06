@@ -88,3 +88,6 @@ Desktop.ini
 
 # Wavefront OBJ sample assets must override machine-wide object-file ignores
 !assets/samples/**/*.obj
+
+# Local scratch files
+tmp/
